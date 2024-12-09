@@ -1,12 +1,19 @@
-export function Task({text}: {text: string}, {key}: {key: string}) {
+export function Task({ id, text }: { id: string, text: string}) {
 
     return (
         <>
-            <li id={key}>
+            <li id={id}>
                 <input type='checkbox'></input>
                 <p>{text}</p>
-                <button>Remove</button>
+                <button onClick={() => HandleDelete(id)}>Remove</button>
             </li>
         </>
     )
+}
+
+function HandleDelete(id: string) {
+    fetch('http://localhost:3000/tasks/' + id, {
+        method: 'DELETE',
+    })
+    return;
 }
