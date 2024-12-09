@@ -7,10 +7,10 @@ function CreateTask({ tasks, setTasks }: { tasks: TaskIf[], setTasks: any }) {
     const [description, setDescription] = useState<string>("")
 
     return (
-        <>
+        <div id="create_task">
             <input type="text" id="description" onInput={(e) => setDescription((e.target as HTMLInputElement).value)} />
             <button onClick={() => HandleCreate(description, tasks, setTasks)}>Create</button>
-        </>
+        </div>
     )
 }
 
