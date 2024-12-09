@@ -9,7 +9,7 @@ export function Task({ id, text, completed }: { id: string, text: string, comple
         <li>
             <input type='checkbox' checked={completedState} onChange={(e) => { handleCheck(e.target.checked, id, text, setCompleted) }}></input>
             <p>{text}</p>
-            <button>Remove</button>
+            <button onClick={() => HandleDelete(id)}>Remove</button>
         </li>
     )
 }
@@ -26,5 +26,10 @@ function handleCheck(checked: boolean, id: string, text: string, setCompleted: a
     })
         .then(response => response.json())
         .then(data => console.log(data))
-    return;
+}
+
+function HandleDelete(id: string) {
+    fetch('http://localhost:3000/tasks/' + id, {
+        method: 'DELETE',
+    })
 }
