@@ -51,6 +51,14 @@ li {
   border-radius: 10px;
 }
 
+li > * {
+  margin: 5px;
+}
+
+li > p{
+  overflow: auto;
+}
+
 ul {
   padding: 0;
 }
