@@ -6,9 +6,9 @@ function App() {
 
   return (
     <>
-    <TaskList/>
-    
-    <CreateTask/>
+      <CreateTask />
+
+      <TaskList />
     </>
   )
 }

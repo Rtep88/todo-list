@@ -14,16 +14,16 @@ function CreateTask() {
 }
 
 function HandleCreate(description: string) {
+    if (description == "")
+        return;
+
     fetch('http://localhost:3000/tasks', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ title: description, completed: true })
+        body: JSON.stringify({ title: description, completed: false })
     })
-        .then(response => response.json())
-        .then(data => console.log(data))
-    return;
 }
 
 export default CreateTask
