@@ -2,9 +2,8 @@ import { useState } from "react";
 
 
 export function Task({ id, text, completed }: { id: string, text: string, completed: boolean }) {
-
     const [completedState, setCompleted] = useState(completed);
-    const [deleted, setDeleted] = useState(completed);
+    const [deleted, setDeleted] = useState(false);
 
     if (!deleted) {
         return (
