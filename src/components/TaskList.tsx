@@ -21,7 +21,7 @@ function TaskList() {
         <>
             <ul>
                 {data.map((task) => (
-                    <Task id={task.id} text={task.title}/>
+                    <Task key={task.id} id={task.id}  text={task.title} completed={task.completed}/>
                 ))}
             </ul>
         </>

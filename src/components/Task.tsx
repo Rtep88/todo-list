@@ -1,19 +1,35 @@
-export function Task({ id, text }: { id: string, text: string}) {
+import { useState } from "react";
+
+
+export function Task({ id, text, completed }: { id: string, text: string, completed: boolean }) {
+
+    const [completedState, setCompleted] = useState(completed);
 
     return (
-        <>
-            <li id={id}>
-                <input type='checkbox'></input>
-                <p>{text}</p>
-                <button onClick={() => HandleDelete(id)}>Remove</button>
-            </li>
-        </>
+        <li>
+            <input type='checkbox' checked={completedState} onChange={(e) => { handleCheck(e.target.checked, id, text, setCompleted) }}></input>
+            <p>{text}</p>
+            <button onClick={() => HandleDelete(id)}>Remove</button>
+        </li>
     )
+}
+
+function handleCheck(checked: boolean, id: string, text: string, setCompleted: any) {
+    setCompleted(checked);
+
+    fetch(`http://localhost:3000/tasks/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: text, completed: checked })
+    })
+        .then(response => response.json())
+        .then(data => console.log(data))
 }
 
 function HandleDelete(id: string) {
     fetch('http://localhost:3000/tasks/' + id, {
         method: 'DELETE',
     })
-    return;
 }
