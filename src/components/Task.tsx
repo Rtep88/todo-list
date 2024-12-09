@@ -4,14 +4,17 @@ import { useState } from "react";
 export function Task({ id, text, completed }: { id: string, text: string, completed: boolean }) {
 
     const [completedState, setCompleted] = useState(completed);
+    const [deleted, setDeleted] = useState(completed);
 
-    return (
-        <li>
-            <input type='checkbox' checked={completedState} onChange={(e) => { handleCheck(e.target.checked, id, text, setCompleted) }}></input>
-            <p>{text}</p>
-            <button onClick={() => HandleDelete(id)}>Remove</button>
-        </li>
-    )
+    if (!deleted) {
+        return (
+            <li>
+                <input type='checkbox' checked={completedState} onChange={(e) => { handleCheck(e.target.checked, id, text, setCompleted) }}></input>
+                <p>{text}</p>
+                <button onClick={() => HandleDelete(id, setDeleted)}>Remove</button>
+            </li>
+        )
+    }
 }
 
 function handleCheck(checked: boolean, id: string, text: string, setCompleted: any) {
@@ -24,12 +27,12 @@ function handleCheck(checked: boolean, id: string, text: string, setCompleted: a
         },
         body: JSON.stringify({ title: text, completed: checked })
     })
-        .then(response => response.json())
-        .then(data => console.log(data))
 }
 
-function HandleDelete(id: string) {
+function HandleDelete(id: string, setDeleted: any) {
     fetch('http://localhost:3000/tasks/' + id, {
         method: 'DELETE',
     })
+
+    setDeleted(true);
 }
