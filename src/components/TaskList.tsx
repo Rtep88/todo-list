@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Task } from "./Task"
 
 function TaskList() {
-    const [data, setData] = useState<{ id: number, title: string, completed: boolean }[]>([]);
+    const [data, setData] = useState<{ id: string, title: string, completed: boolean }[]>([]);
 
 
     useEffect(() => {
@@ -21,7 +21,7 @@ function TaskList() {
         <>
             <ul>
                 {data.map((task) => (
-                    <Task key={task.id} text={task.title} />
+                    <Task key={task.id} id={task.id}  text={task.title} completed={task.completed}/>
                 ))}
             </ul>
         </>
