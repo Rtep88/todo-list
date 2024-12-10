@@ -1,26 +1,23 @@
 import { useState } from "react";
-import { DATABASE_URL, ITask } from "../App";
+import { DATABASE_URL, FetchDatabase } from "../App";
 
 
-export function Task({ id, text, completed, tasks, setTasks }: { id: string, text: string, completed: boolean, tasks: ITask[], setTasks: any }) {
+export function Task({ id, text, completed, setTasks }: { id: string, text: string, completed: boolean, setTasks: any }) {
     const [completedState, setCompleted] = useState(completed);
-    const [deleted, setDeleted] = useState(false);
 
-    if (!deleted) {
-        return (
-            <li>
-                <input type='checkbox' checked={completedState} onChange={(e) => { handleCheck(e.target.checked, id, text, setCompleted, tasks, setTasks) }}></input>
-                <p className={completedState ? 'checked' : ''}>{text}</p>
-                <button onClick={() => HandleDelete(id, setDeleted)}>Remove</button>
-            </li>
-        )
-    }
+    return (
+        <li>
+            <input type='checkbox' checked={completedState} onChange={(e) => { handleCheck(e.target.checked, text, setCompleted, setTasks, id) }}></input>
+            <p className={completedState ? 'checked' : ''}>{text}</p>
+            <button onClick={() => HandleDelete(id, setTasks)}>Remove</button>
+        </li>
+    )
 }
 
-function handleCheck(checked: boolean, id: string, text: string, setCompleted: any, tasks: ITask[], setTasks: any) {
+function handleCheck(checked: boolean, text: string, setCompleted: any, setTasks: any, id: string) {
     setCompleted(checked);
 
-    fetch(DATABASE_URL + '/tasks/${id}', {
+    fetch(DATABASE_URL + '/tasks/' + id, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
@@ -28,15 +25,13 @@ function handleCheck(checked: boolean, id: string, text: string, setCompleted: a
         body: JSON.stringify({ title: text, completed: checked })
     });
 
-    tasks.find((task: ITask) => task.id == id)!.completed = checked;
-
-    setTasks([...tasks].sort((a: ITask, b: ITask) => (a.completed ? 1 : 0) - (b.completed ? 1 : 0)));
+    FetchDatabase(setTasks);
 }
 
-function HandleDelete(id: string, setDeleted: any) {
+function HandleDelete(id: string, setTasks: any) {
     fetch(DATABASE_URL + '/tasks/' + id, {
         method: 'DELETE',
     })
 
-    setDeleted(true);
+    FetchDatabase(setTasks);
 }
