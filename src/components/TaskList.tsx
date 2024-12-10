@@ -1,7 +1,7 @@
 import { Task } from "./Task"
-import { TaskIf } from "../App"
+import { ITask } from "../App"
 
-function TaskList({tasks, setTasks}: {tasks: TaskIf[], setTasks: any}) {
+function TaskList({tasks, setTasks}: {tasks: ITask[], setTasks: any}) {
 
     return (
         <>

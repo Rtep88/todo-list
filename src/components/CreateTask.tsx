@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import '../App.css'
-import { TaskIf } from '../App'
+import { ITask } from '../App'
 
-function CreateTask({ tasks, setTasks }: { tasks: TaskIf[], setTasks: any }) {
+function CreateTask({ tasks, setTasks }: { tasks: ITask[], setTasks: any }) {
 
     const [description, setDescription] = useState<string>("")
 
@@ -14,7 +14,7 @@ function CreateTask({ tasks, setTasks }: { tasks: TaskIf[], setTasks: any }) {
     )
 }
 
-function HandleCreate(description: string, tasks: TaskIf[], setTasks: any) {
+function HandleCreate(description: string, tasks: ITask[], setTasks: any) {
     if (description == "")
         return;
 
@@ -25,8 +25,8 @@ function HandleCreate(description: string, tasks: TaskIf[], setTasks: any) {
         },
         body: JSON.stringify({ title: description, completed: false })
     })
-
-    setTasks([{ id: "", title: description, completed: false }, ...tasks]);
+        .then(task => task.json())
+        .then((task: ITask) => setTasks([task, ...tasks]));
 }
 
 export default CreateTask
