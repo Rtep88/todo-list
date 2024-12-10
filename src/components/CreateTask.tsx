@@ -1,32 +1,32 @@
 import { useState } from 'react'
 import '../App.css'
-import { ITask } from '../App'
+import { DATABASE_URL, FetchDatabase } from '../App'
 
-function CreateTask({ tasks, setTasks }: { tasks: ITask[], setTasks: any }) {
+function CreateTask({ setTasks }: { setTasks: any }) {
 
     const [description, setDescription] = useState<string>("")
 
     return (
         <div id="create_task">
             <input type="text" id="description" onInput={(e) => setDescription((e.target as HTMLInputElement).value)} />
-            <button onClick={() => HandleCreate(description, tasks, setTasks)}>Create</button>
+            <button onClick={() => HandleCreate(description, setTasks)}>Create</button>
         </div>
     )
 }
 
-function HandleCreate(description: string, tasks: ITask[], setTasks: any) {
+function HandleCreate(description: string, setTasks: any) {
     if (description == "")
         return;
 
-    fetch('http://localhost:3000/tasks', {
+    fetch(DATABASE_URL + '/tasks', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ title: description, completed: false })
     })
-        .then(task => task.json())
-        .then((task: ITask) => setTasks([task, ...tasks]));
+
+    FetchDatabase(setTasks);
 }
 
 export default CreateTask
