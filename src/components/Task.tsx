@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { TaskIf } from "../App";
+import { ITask } from "../App";
 
 
-export function Task({ id, text, completed, tasks, setTasks }: { id: string, text: string, completed: boolean, tasks: TaskIf[], setTasks: any }) {
+export function Task({ id, text, completed, tasks, setTasks }: { id: string, text: string, completed: boolean, tasks: ITask[], setTasks: any }) {
     const [completedState, setCompleted] = useState(completed);
     const [deleted, setDeleted] = useState(false);
 
@@ -17,7 +17,7 @@ export function Task({ id, text, completed, tasks, setTasks }: { id: string, tex
     }
 }
 
-function handleCheck(checked: boolean, id: string, text: string, setCompleted: any, tasks: TaskIf[], setTasks: any) {
+function handleCheck(checked: boolean, id: string, text: string, setCompleted: any, tasks: ITask[], setTasks: any) {
     setCompleted(checked);
 
     fetch(`http://localhost:3000/tasks/${id}`, {
@@ -28,9 +28,9 @@ function handleCheck(checked: boolean, id: string, text: string, setCompleted: a
         body: JSON.stringify({ title: text, completed: checked })
     });
 
-    tasks.find((task: TaskIf) => task.id == id)!.completed = checked;
+    tasks.find((task: ITask) => task.id == id)!.completed = checked;
 
-    setTasks([...tasks].sort((a: TaskIf, b: TaskIf) => (a.completed ? 1 : 0) - (b.completed ? 1 : 0)));
+    setTasks([...tasks].sort((a: ITask, b: ITask) => (a.completed ? 1 : 0) - (b.completed ? 1 : 0)));
 }
 
 function HandleDelete(id: string, setDeleted: any) {
