@@ -27,6 +27,8 @@ function App() {
 
   return (
     <>
+      <h1>Todo List</h1>
+
       <CreateTask tasks={tasks} setTasks={setTasks} />
 
       <TaskList tasks={tasks} setTasks={setTasks} />
