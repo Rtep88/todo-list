@@ -6,7 +6,8 @@ import CreateTask from './components/CreateTask'
 export interface ITask {
   id: string,
   title: string,
-  completed: boolean
+  completed: boolean,
+  finishDate: number
 }
 
 export const DATABASE_URL: string = 'http://localhost:3000';
