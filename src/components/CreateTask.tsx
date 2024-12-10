@@ -26,7 +26,7 @@ function HandleCreate(description: string, tasks: TaskIf[], setTasks: any) {
         body: JSON.stringify({ title: description, completed: false })
     })
 
-    setTasks([...tasks, { id: "", title: description, completed: false }]);
+    setTasks([{ id: "", title: description, completed: false }, ...tasks]);
 }
 
 export default CreateTask

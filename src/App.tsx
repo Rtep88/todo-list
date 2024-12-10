@@ -20,7 +20,8 @@ function App() {
       }
     })
       .then(response => response.json())
-      .then(tasks => setTasks(tasks));
+      .then((tasks: TaskIf[]) => tasks.sort((a: TaskIf, b: TaskIf) => (a.completed ? 1 : 0) - (b.completed ? 1 : 0)))
+      .then((tasks: TaskIf[]) => setTasks(tasks));
     return;
   }, []);
 
@@ -28,7 +29,7 @@ function App() {
     <>
       <CreateTask tasks={tasks} setTasks={setTasks} />
 
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} setTasks={setTasks} />
     </>
   )
 }
