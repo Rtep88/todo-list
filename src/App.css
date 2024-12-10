@@ -76,3 +76,8 @@ ul {
   border-radius: 10px;
   background-color: #242424;
 }
+
+.checked {
+  color: gray;
+  text-decoration: line-through;
+}

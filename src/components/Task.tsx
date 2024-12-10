@@ -9,7 +9,7 @@ export function Task({ id, text, completed }: { id: string, text: string, comple
         return (
             <li>
                 <input type='checkbox' checked={completedState} onChange={(e) => { handleCheck(e.target.checked, id, text, setCompleted) }}></input>
-                <p>{text}</p>
+                <p className={completedState ? 'checked' : ''}>{text}</p>
                 <button onClick={() => HandleDelete(id, setDeleted)}>Remove</button>
             </li>
         )
@@ -25,7 +25,9 @@ function handleCheck(checked: boolean, id: string, text: string, setCompleted: a
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ title: text, completed: checked })
-    })
+    });
+
+
 }
 
 function HandleDelete(id: string, setDeleted: any) {
