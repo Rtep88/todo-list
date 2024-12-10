@@ -9,11 +9,13 @@ export interface ITask {
   completed: boolean
 }
 
+export const DATABASE_URL: string = 'http://localhost:3000';
+
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/tasks', {
+    fetch(DATABASE_URL + '/tasks', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

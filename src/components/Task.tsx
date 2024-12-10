@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ITask } from "../App";
+import { DATABASE_URL, ITask } from "../App";
 
 
 export function Task({ id, text, completed, tasks, setTasks }: { id: string, text: string, completed: boolean, tasks: ITask[], setTasks: any }) {
@@ -20,7 +20,7 @@ export function Task({ id, text, completed, tasks, setTasks }: { id: string, tex
 function handleCheck(checked: boolean, id: string, text: string, setCompleted: any, tasks: ITask[], setTasks: any) {
     setCompleted(checked);
 
-    fetch(`http://localhost:3000/tasks/${id}`, {
+    fetch(DATABASE_URL + '/tasks/${id}', {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ function handleCheck(checked: boolean, id: string, text: string, setCompleted: a
 }
 
 function HandleDelete(id: string, setDeleted: any) {
-    fetch('http://localhost:3000/tasks/' + id, {
+    fetch(DATABASE_URL + '/tasks/' + id, {
         method: 'DELETE',
     })
 

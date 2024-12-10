@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import '../App.css'
-import { ITask } from '../App'
+import { DATABASE_URL, ITask } from '../App'
 
 function CreateTask({ tasks, setTasks }: { tasks: ITask[], setTasks: any }) {
 
@@ -18,7 +18,7 @@ function HandleCreate(description: string, tasks: ITask[], setTasks: any) {
     if (description == "")
         return;
 
-    fetch('http://localhost:3000/tasks', {
+    fetch(DATABASE_URL + '/tasks', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
