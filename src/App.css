@@ -45,6 +45,10 @@ ul {
   flex-direction: column;
 }
 
+#create_task>input {
+  margin-bottom: 15px;
+}
+
 .checked {
   color: gray;
   text-decoration: line-through;

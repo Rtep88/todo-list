@@ -11,7 +11,6 @@ function CreateTask({ setTasks }: { setTasks: any }) {
         <div id="create_task">
             <label htmlFor="description">Popis:</label>
             <input type="text" id="description" onInput={(e) => setDescription((e.target as HTMLInputElement).value)} />
-            <br/>
             <label htmlFor="date">Datum odevzdání:</label>
             <input type='date' id='date' min={new Date(Date.now()).toISOString().split('T')[0]} onInput={(e) => setDate(new Date((e.target as HTMLInputElement).value))}></input>
             <button onClick={() => HandleCreate(description, setTasks, date)}>Create</button>
