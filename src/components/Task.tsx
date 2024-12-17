@@ -8,8 +8,8 @@ export function Task({ id, text, completed, date, setTasks }: { id: string, text
     return (
         <li>
             <input type='checkbox' checked={completedState} onChange={(e) => { handleCheck(e.target.checked, text, setCompleted, setTasks, id) }}></input>
-            <p>{new Date(date).toISOString().split('T')[0]}</p>
-            <p className={completedState ? 'checked' : ''}>{text}</p>
+            <p>{"Datum odevzdání: " + new Date(date).toISOString().split('T')[0]}</p>
+            <p className={completedState ? 'checked' : ''}>{"Popis: " + text}</p>
             <button onClick={() => HandleDelete(id, setTasks)}>Remove</button>
         </li>
     )

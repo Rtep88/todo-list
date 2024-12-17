@@ -31,7 +31,7 @@ function App() {
 }
 
 export function FetchDatabase(setTasks: any) {
-  fetch(DATABASE_URL + '/tasks?_sort=-completed', {
+  fetch(DATABASE_URL + '/tasks?_sort=-completed,finishDate', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
